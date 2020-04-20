@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { PokeApiService } from 'services/PokeApiService';
 
 import { Spinner } from 'components/Spinner';
+import { ErrorButton } from 'components/ErrorButton';
 
 export class PokemonDetails extends Component {
 
@@ -90,6 +91,7 @@ const PokemonDetailsView = ({ pokemon }) => {
             <span>{height}</span>
           </li>
         </ul>
+        <ErrorButton />
       </div>
     </>
   );

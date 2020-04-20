@@ -1,4 +1,16 @@
 .app {
   width: 1200px;
   margin: 0 auto;
+
+  .row {
+    margin-bottom: 1rem;
+  }
+
+  .button-row {
+    margin: 0 0 1rem 0;
+
+    button {
+      margin-right: 1rem;
+    }
+  }
 }

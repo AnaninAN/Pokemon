@@ -49,6 +49,7 @@ module.exports = (env = {}) => {
         assets: path.resolve(__dirname, 'src', 'assets'),
         services: path.resolve(__dirname, 'src', 'services'),
         components: path.resolve(__dirname, 'src', 'components'),
+        pages: path.resolve(__dirname, 'src', 'pages'),
       }
     },
 
