@@ -2,10 +2,10 @@ import './RandomPokemon.scss';
 
 import React, { Component } from 'react';
 
+import { PokeApiService } from 'services/PokeApiService';
+
 import { Spinner } from 'components/Spinner';
 import { ErrorIndicator } from 'components/ErrorIndicator';
-
-import { PokeApiService } from 'services/PokeApiService';
 
 export class RandomPokemon extends Component {
 
@@ -17,10 +17,14 @@ export class RandomPokemon extends Component {
     error: false,
   };
 
-  constructor() {
-    super();
+  componentDidMount() {
     this.updatePokemon();
-  }
+    this.interval = setInterval(this.updatePokemon, 100000);
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  };
 
   onPokemonLoaded = (pokemon) => {
     this.setState({
@@ -36,9 +40,8 @@ export class RandomPokemon extends Component {
     });
   };
 
-  updatePokemon() {
+  updatePokemon = () => {
     const id = Math.round(0.5 + Math.random() * 800);
-    //const id = 120000;
     this.pokeApiService
       .getPokemon(id)
       .then(this.onPokemonLoaded)
