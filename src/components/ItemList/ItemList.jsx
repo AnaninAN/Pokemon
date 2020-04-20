@@ -41,7 +41,10 @@ export class ItemList extends Component {
     const { currentPage, data : { pageSize } } = this.state;
     const number = currentPage * pageSize - pageSize + 1;
 
-    return arr.map(({ id, name }, idx) => {
+    return arr.map((item, idx) => {
+      const { id } = item;
+      const label = this.props.children(item);
+
       const classes = classNames('list-group-item', {
         'active': this.props.pokemonId === id,
       });
@@ -50,7 +53,7 @@ export class ItemList extends Component {
         <li key={id}
             className={classes}
             onClick={() => this.props.onPokemonSelected(id)}>
-          <span className="list-group-item__number">{number + idx}.</span> {name}
+          <span className="list-group-item__number">{number + idx}.</span> {label}
         </li>
       );
     });

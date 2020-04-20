@@ -34,9 +34,9 @@ export const PaginationItems = ({ pageSize, totalItemCount,
       <li className={classes}
           key={idx}
           onClick={p !== '...' ? (() => onPaginationSelect(p)) : undefined}>
-        <a className="page-link" href="#">
+        <div className="page-link">
           {p}
-        </a>
+        </div>
       </li>
     );
   });
@@ -49,20 +49,20 @@ export const PaginationItems = ({ pageSize, totalItemCount,
   };
 
   return (
-    <nav className="pagination-pokemon" aria-label="Page navigation">
+    <nav className="pagination-item" aria-label="Page navigation">
       <ul className="pagination justify-content-center">
         <li className={classPreviousNext('Previous')}
             onClick={currentPage !== 1 ?
                     (() => onPaginationSelect(currentPage - 1)) :
                     undefined}>
-          <a className="page-link" href="#">Previous</a>
+          <div className="page-link">Previous</div>
         </li>
           {renderPages}
         <li className={classPreviousNext('Next')}
             onClick={currentPage !== pagesItems ?
                     (() => onPaginationSelect(currentPage + 1)) :
                     undefined}>
-          <a className="page-link" href="#">Next</a>
+          <div className="page-link">Next</div>
         </li>
       </ul>
     </nav>

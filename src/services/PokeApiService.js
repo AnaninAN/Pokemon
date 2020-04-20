@@ -13,17 +13,14 @@ export class PokeApiService {
 
   getAllItem = async (currentPage, url) => {
     const offset = currentPage * this._pageSize - this._pageSize;
-
     const res = await this.getResource(`${url}?offset=${offset}&limit=${this._pageSize}`);
-
     const itemList = res.results.map(this._transformAllItem);
     const totalItemCount = res.count;
-
     return {
       itemList,
       pageSize: this._pageSize,
       totalItemCount,
-    };
+    }
   };
 
   getAllPokemon = (currentPage) => {
@@ -39,41 +36,31 @@ export class PokeApiService {
     return this.getAllItem(currentPage, '/ability/');
   };
 
-  getAbility = (id) => {
-    return this.getResource(`/ability/${id}/`);
+  getAbility = async (id) => {
+    const ability = await this.getResource(`/ability/${id}/`);
+    return this._transformAbility(ability);
   };
 
-  getAllPokemonForm = async () => {
-    const res = await this.getResource(`/pokemon-form/`);
-    return res;
+  getPokemonImage = ({id}) => {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   };
 
-  getPokemonForm = (id) => {
-    return this.getResource(`/pokemon-form/${id}/`);
+  getAbilityImage = ({id}) => {
+    return null;
   };
 
-  getAllPokemonType = async () => {
-    const res = await this.getResource(`/type/`);
-    return res;
-  };
-
-  getPokemonType = (id) => {
-    return this.getResource(`/type/${id}/`);
-  };
-
-  _ucFirst(str) {
+  _ucFirst = (str) => {
     if (!str) return str;
     return str[0].toUpperCase() + str.slice(1);
   };
 
-  _extractId(item) {
+  _extractId = (item) => {
     const idRegExp = /\/([0-9]*)\/$/;
     return item.url.match(idRegExp)[1];
-  }
+  };
 
   _transformAllItem = (item) => {
     const id = this._extractId(item);
-
     return {
       id,
       name: this._ucFirst(item.name),
@@ -87,6 +74,15 @@ export class PokeApiService {
       type: pokemon.types[0].type.name,
       weight: pokemon.weight,
       height: pokemon.height,
+    };
+  };
+
+  _transformAbility = (ability) => {
+    return {
+      id: ability.id,
+      name: this._ucFirst(ability.name),
+      shortEffect: ability.effect_entries[0].short_effect,
+      effect: ability.effect_entries[0].effect,
     };
   };
 }

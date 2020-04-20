@@ -17,9 +17,6 @@ export const Header = () => {
         <li>
           <a href="#">Ability</a>
         </li>
-        <li>
-          <a href="#">Type</a>
-        </li>
       </ul>
     </div>
   );

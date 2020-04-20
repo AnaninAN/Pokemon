@@ -5,8 +5,9 @@ import React, { Component } from 'react';
 import { PokeApiService } from 'services/PokeApiService';
 
 import { ItemList } from 'components/ItemList';
-import { PokemonDetails } from 'components/PokemonDetails';
-import { ErrorIndicator } from 'components/ErrorIndicator';
+import { ItemDetails, Record } from 'components/ItemDetails';
+import { Row } from 'components/Row';
+import { ErrorBoundry } from 'components/ErrorBoundry';
 
 export class PokemonPage extends Component {
 
@@ -14,7 +15,6 @@ export class PokemonPage extends Component {
 
   state = {
     selectedPokemon: null,
-    hasError: false,
   };
 
   handlePokemonSelected = (id) => {
@@ -23,29 +23,35 @@ export class PokemonPage extends Component {
     });
   };
 
-  componentDidCatch() {
-    this.setState({
-      hasError: true,
-    });
-  };
-
   render() {
 
-    if (this.state.hasError) {
-      return <ErrorIndicator />;
-    }
+    const { getAllPokemon, getPokemon, getPokemonImage } = this.pokeApiService;
+
+    const itemList = (
+      <ItemList onPokemonSelected={this.handlePokemonSelected}
+                pokemonId={this.state.selectedPokemon}
+                getData={getAllPokemon} >
+        {(i) => `${i.name}`}
+      </ItemList>
+    );
+
+    const pokemonDetails = (
+      <ItemDetails
+        itemId={this.state.selectedPokemon}
+        getData={getPokemon}
+        getImageUrl={getPokemonImage}>
+
+        <Record field="type" label="Type" />
+        <Record field="weight" label="Weight" />
+        <Record field="height" label="Height" />
+
+      </ItemDetails>
+    );
 
     return (
-      <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList onPokemonSelected={this.handlePokemonSelected}
-                    pokemonId={this.state.selectedPokemon}
-                    getData={this.pokeApiService.getAllPokemon} />
-        </div>
-        <div className="col-md-6">
-          <PokemonDetails pokemonId={this.state.selectedPokemon} />
-        </div>
-      </div>
+      <ErrorBoundry>
+        <Row left={itemList} right={pokemonDetails} />
+      </ErrorBoundry>
     );
   };
 }

@@ -20,7 +20,7 @@ export class RandomPokemon extends Component {
 
   componentDidMount() {
     this.updatePokemon();
-    this.interval = setInterval(this.updatePokemon, 60000);
+    this.interval = setInterval(this.updatePokemon, 50000);
   };
 
   componentWillUnmount() {

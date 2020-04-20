@@ -3,6 +3,10 @@
   padding: 1rem;
 }
 
+.jumbotron {
+  margin-bottom: 1rem;
+}
+
 .random-pokemon .pokemon-image {
   width: 150px;
   height: 150px;
@@ -14,9 +18,9 @@
   min-width: 200px;
 }
 
-.random-pokemon .list-group {
-  margin: 1rem 0 0 1rem;
-}
+  .random-pokemon .list-group {
+    margin: 1rem 0 0 1rem;
+  }
 
 .random-pokemon .list-group-item {
   padding: .25rem;
