@@ -1,7 +1,7 @@
 export class PokeApiService {
 
   _apiBase = 'https://pokeapi.co/api/v2';
-  _pageSize = 5;
+  _pageSize = 10;
 
   getResource = async (url) => {
     const res = await fetch(`${this._apiBase}${url}`);
@@ -11,19 +11,23 @@ export class PokeApiService {
     return await res.json();
   };
 
-  getAllPokemon = async (currentPage) => {
+  getAllItem = async (currentPage, url) => {
     const offset = currentPage * this._pageSize - this._pageSize;
 
-    const res = await this.getResource(`/pokemon/?offset=${offset}&limit=${this._pageSize}`);
+    const res = await this.getResource(`${url}?offset=${offset}&limit=${this._pageSize}`);
 
-    const pokemonList = res.results.map(this._transformAllPokemon);
-    const totalPokemonCount = res.count;
+    const itemList = res.results.map(this._transformAllItem);
+    const totalItemCount = res.count;
 
     return {
-      pokemonList,
+      itemList,
       pageSize: this._pageSize,
-      totalPokemonCount,
+      totalItemCount,
     };
+  };
+
+  getAllPokemon = (currentPage) => {
+    return this.getAllItem(currentPage, '/pokemon/');
   };
 
   getPokemon = async (id) => {
@@ -31,9 +35,8 @@ export class PokeApiService {
     return this._transformPokemon(pokemon);
   };
 
-  getAllAbility = async () => {
-    const res = await this.getResource(`/ability/`);
-    return res;
+  getAllAbility = (currentPage) => {
+    return this.getAllItem(currentPage, '/ability/');
   };
 
   getAbility = (id) => {
@@ -68,12 +71,12 @@ export class PokeApiService {
     return item.url.match(idRegExp)[1];
   }
 
-  _transformAllPokemon = (pokemon) => {
-    const id = this._extractId(pokemon);
+  _transformAllItem = (item) => {
+    const id = this._extractId(item);
 
     return {
       id,
-      name: this._ucFirst(pokemon.name),
+      name: this._ucFirst(item.name),
     };
   };
 

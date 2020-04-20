@@ -33,12 +33,12 @@ export class App extends Component {
       return <ErrorIndicator />;
     }
 
-    const pokemon = this.state.showRandomPokemon ? <RandomPokemon /> : null;
+    const randomPokemon = this.state.showRandomPokemon ? <RandomPokemon /> : null;
 
     return (
       <div className="app">
         <Header />
-        {pokemon}
+        {randomPokemon}
 
         <div className="row mb2 button-row">
           <button
@@ -49,8 +49,6 @@ export class App extends Component {
           <ErrorButton />
         </div>
 
-        <PokemonPage />
-        <PokemonPage />
         <PokemonPage />
       </div>
     );

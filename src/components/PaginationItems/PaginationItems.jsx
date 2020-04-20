@@ -1,11 +1,11 @@
-import './PaginationPokemon.scss';
+import './PaginationItems.scss';
 
 import React from 'react';
 import classNames from 'classnames';
 
-export const PaginationPokemon = ({ pageSize, totalPokemonCount,
-                                    currentPage, onPaginationSelect }) => {
-  const pagesPokemon = Math.ceil(totalPokemonCount / pageSize);
+export const PaginationItems = ({ pageSize, totalItemCount,
+                                  currentPage, onPaginationSelect }) => {
+  const pagesItems = Math.ceil(totalItemCount / pageSize);
 
   const pagination = (num, limit, range = 3) => {
     let arr = [];
@@ -25,7 +25,7 @@ export const PaginationPokemon = ({ pageSize, totalPokemonCount,
     return arr;
   }
 
-  const renderPages = pagination(currentPage, pagesPokemon).map((p, idx) => {
+  const renderPages = pagination(currentPage, pagesItems).map((p, idx) => {
     const classes = classNames('page-item', {
       'active': currentPage === p,
     })
@@ -44,7 +44,7 @@ export const PaginationPokemon = ({ pageSize, totalPokemonCount,
   const classPreviousNext = (p) => {
     return classNames('page-item', {
       'disabled': (p === 'Previous' && currentPage === 1)
-                  || (p === 'Next' && currentPage === pagesPokemon),
+                  || (p === 'Next' && currentPage === pagesItems),
     });
   };
 
@@ -59,7 +59,7 @@ export const PaginationPokemon = ({ pageSize, totalPokemonCount,
         </li>
           {renderPages}
         <li className={classPreviousNext('Next')}
-            onClick={currentPage !== pagesPokemon ?
+            onClick={currentPage !== pagesItems ?
                     (() => onPaginationSelect(currentPage + 1)) :
                     undefined}>
           <a className="page-link" href="#">Next</a>

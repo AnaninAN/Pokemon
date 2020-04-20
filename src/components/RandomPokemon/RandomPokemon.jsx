@@ -13,13 +13,14 @@ export class RandomPokemon extends Component {
 
   state = {
     pokemon: {},
+    countPokemon: null,
     loading: true,
     error: false,
   };
 
   componentDidMount() {
     this.updatePokemon();
-    this.interval = setInterval(this.updatePokemon, 100000);
+    this.interval = setInterval(this.updatePokemon, 60000);
   };
 
   componentWillUnmount() {
@@ -41,7 +42,8 @@ export class RandomPokemon extends Component {
   };
 
   updatePokemon = () => {
-    const id = Math.round(0.5 + Math.random() * 800);
+    const id = Math.round(0.5 + Math.random() * 500);
+
     this.pokeApiService
       .getPokemon(id)
       .then(this.onPokemonLoaded)
