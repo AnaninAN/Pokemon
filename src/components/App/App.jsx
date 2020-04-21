@@ -2,17 +2,15 @@ import './App.scss';
 
 import React, { Component } from 'react';
 
-import { PokeApiService } from 'services/PokeApiService';
+import PokeApiService from 'services/PokeApiService';
 
-import { Header } from 'components/Header';
-import { RandomPokemon } from 'components/RandomPokemon';
-import { PokemonPage } from 'pages/PokemonPage';
-import { ErrorButton } from 'components/ErrorButton';
-import { ErrorIndicator } from 'components/ErrorIndicator';
-import { Row } from 'components/Row';
-import { ItemDetails, Record } from 'components/ItemDetails';
+import Header from 'components/Header';
+import RandomPokemon from 'components/RandomPokemon';
+import PokemonPage from 'pages/PokemonPage';
+import ErrorButton from 'components/ErrorButton';
+import ErrorIndicator from 'components/ErrorIndicator';
 
-export class App extends Component {
+export default class App extends Component {
 
   pokeApiService = new PokeApiService();
 
@@ -34,6 +32,7 @@ export class App extends Component {
   }
 
   render() {
+    const { getAllPokemon, getAllAbility } = this.pokeApiService;
 
     if (this.state.hasError) {
       return <ErrorIndicator />;
@@ -58,5 +57,5 @@ export class App extends Component {
         <PokemonPage />
       </div>
     );
-  };
-};
+  }
+}

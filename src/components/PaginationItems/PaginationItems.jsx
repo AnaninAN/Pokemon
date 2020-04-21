@@ -3,7 +3,7 @@ import './PaginationItems.scss';
 import React from 'react';
 import classNames from 'classnames';
 
-export const PaginationItems = ({ pageSize, totalItemCount,
+const PaginationItems = ({ pageSize, totalItemCount,
                                   currentPage, onPaginationSelect }) => {
   const pagesItems = Math.ceil(totalItemCount / pageSize);
 
@@ -68,3 +68,5 @@ export const PaginationItems = ({ pageSize, totalItemCount,
     </nav>
   );
 };
+
+export default PaginationItems;

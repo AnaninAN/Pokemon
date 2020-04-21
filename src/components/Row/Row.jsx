@@ -2,7 +2,7 @@ import './Row.scss'
 
 import React from 'react';
 
-export const Row = ({ left, right }) => {
+const Row = ({ left, right }) => {
   return (
     <div className="row mb2">
       <div className="col-md-6">
@@ -14,3 +14,5 @@ export const Row = ({ left, right }) => {
     </div>
   );
 };
+
+export default Row;

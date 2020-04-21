@@ -3,11 +3,10 @@ import './ItemList.scss'
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-import { Spinner } from 'components/Spinner';
-import { ErrorIndicator } from 'components/ErrorIndicator';
-import { PaginationItems } from 'components/PaginationItems';
+import Spinner from 'components/Spinner';
+import PaginationItems from 'components/PaginationItems';
 
-export class ItemList extends Component {
+export default class ItemList extends Component {
 
   state = {
     data: {
@@ -76,5 +75,5 @@ export class ItemList extends Component {
                             onPaginationSelect={this.handlePaginationSelect} />
       </>
     );
-  };
-};
+  }
+}

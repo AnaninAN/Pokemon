@@ -2,7 +2,7 @@ import './Header.scss';
 
 import React from 'react';
 
-export const Header = () => {
+const Header = () => {
   return (
     <div className="header d-flex">
       <h3>
@@ -21,3 +21,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header;

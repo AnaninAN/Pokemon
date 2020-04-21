@@ -2,9 +2,9 @@ import './ErrorBoundry.scss';
 
 import React, { Component } from 'react';
 
-import { ErrorIndicator } from 'components/ErrorIndicator';
+import ErrorIndicator from 'components/ErrorIndicator';
 
-export class ErrorBoundry extends Component {
+export default class ErrorBoundry extends Component {
 
   state = {
     hasError: false,
@@ -23,5 +23,5 @@ export class ErrorBoundry extends Component {
     }
 
     return this.props.children;
-  };
+  }
 }

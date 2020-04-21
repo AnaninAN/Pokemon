@@ -2,14 +2,14 @@ import './PokemonPage.scss';
 
 import React, { Component } from 'react';
 
-import { PokeApiService } from 'services/PokeApiService';
+import PokeApiService from 'services/PokeApiService';
 
-import { ItemList } from 'components/ItemList';
-import { ItemDetails, Record } from 'components/ItemDetails';
-import { Row } from 'components/Row';
-import { ErrorBoundry } from 'components/ErrorBoundry';
+import ItemList from 'components/ItemList';
+import ItemDetails, { Record } from 'components/ItemDetails';
+import Row from 'components/Row';
+import ErrorBoundry from 'components/ErrorBoundry';
 
-export class PokemonPage extends Component {
+export default class PokemonPage extends Component {
 
   pokeApiService = new PokeApiService();
 
@@ -53,5 +53,5 @@ export class PokemonPage extends Component {
         <Row left={itemList} right={pokemonDetails} />
       </ErrorBoundry>
     );
-  };
+  }
 }

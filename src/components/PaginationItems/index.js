@@ -1,1 +1,3 @@
-export * from './PaginationItems';
+import PaginationItems from './PaginationItems';
+
+export default PaginationItems;

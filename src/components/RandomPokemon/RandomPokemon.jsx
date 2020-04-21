@@ -2,12 +2,12 @@ import './RandomPokemon.scss';
 
 import React, { Component } from 'react';
 
-import { PokeApiService } from 'services/PokeApiService';
+import PokeApiService from 'services/PokeApiService';
 
-import { Spinner } from 'components/Spinner';
-import { ErrorIndicator } from 'components/ErrorIndicator';
+import Spinner from 'components/Spinner';
+import ErrorIndicator from 'components/ErrorIndicator';
 
-export class RandomPokemon extends Component {
+export default class RandomPokemon extends Component {
 
   pokeApiService = new PokeApiService();
 
@@ -66,7 +66,7 @@ export class RandomPokemon extends Component {
         {errorMessage}
       </div>
     );
-  };
+  }
 }
 
 const PokemonView = ({ pokemon }) => {

@@ -1,7 +1,7 @@
-export class PokeApiService {
+export default class PokeApiService {
 
   _apiBase = 'https://pokeapi.co/api/v2';
-  _pageSize = 10;
+  _pageSize = 5;
 
   getResource = async (url) => {
     const res = await fetch(`${this._apiBase}${url}`);

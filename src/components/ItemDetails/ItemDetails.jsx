@@ -2,12 +2,12 @@ import './ItemDetails.scss';
 
 import React, { Component } from 'react';
 
-import { PokeApiService } from 'services/PokeApiService';
+import PokeApiService from 'services/PokeApiService';
 
-import { Spinner } from 'components/Spinner';
-import { ErrorButton } from 'components/ErrorButton';
+import Spinner from 'components/Spinner';
+import ErrorButton from 'components/ErrorButton';
 
-export const Record = ({ item, field, label }) => {
+const Record = ({ item, field, label }) => {
   return (
     <li className="list-group-item">
       <span className="term">{label}</span>
@@ -16,7 +16,9 @@ export const Record = ({ item, field, label }) => {
   );
 };
 
-export class ItemDetails extends Component {
+export { Record };
+
+export default class ItemDetails extends Component {
 
   pokeApiService = new PokeApiService();
 
@@ -81,5 +83,5 @@ export class ItemDetails extends Component {
       </div>
       </div>
     );
-  };
+  }
 }

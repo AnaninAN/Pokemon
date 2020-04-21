@@ -2,7 +2,7 @@ import './ErrorButton.scss';
 
 import React, { Component } from 'react';
 
-export class ErrorButton extends Component {
+export default class ErrorButton extends Component {
 
   state = {
     renderError: false

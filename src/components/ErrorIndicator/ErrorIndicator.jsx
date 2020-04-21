@@ -4,7 +4,7 @@ import React from 'react';
 
 import icon from './death-star.png';
 
-export const ErrorIndicator = () => {
+const ErrorIndicator = () => {
   return (
     <div className="error-indicator">
       <img src={icon} alt="error icon"/>
@@ -18,3 +18,5 @@ export const ErrorIndicator = () => {
     </div>
   );
 };
+
+export default ErrorIndicator;
