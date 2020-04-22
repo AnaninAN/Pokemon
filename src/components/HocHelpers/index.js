@@ -1,5 +1,11 @@
-import withData from './WithData';
+import WithDataList from './WithDataList';
+import WithPokeApiService from './WithPokeApiService';
+import compose from './compose';
+import withChildFunction from './withChildFunction';
 
 export {
-  withData
+  WithDataList,
+  WithPokeApiService,
+  compose,
+  withChildFunction
 };

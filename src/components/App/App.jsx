@@ -3,59 +3,45 @@ import './App.scss';
 import React, { Component } from 'react';
 
 import PokeApiService from 'services/PokeApiService';
+import DummyPokeApiService from 'services/DummyPokeApiService';
+import { PokeApiServiceProvider } from 'components/PokeApiServiceContext';
 
 import Header from 'components/Header';
 import RandomPokemon from 'components/RandomPokemon';
-import PokemonPage from 'pages/PokemonPage';
-import ErrorButton from 'components/ErrorButton';
-import ErrorIndicator from 'components/ErrorIndicator';
+import { PokemonPage, AbilityPage } from 'pages';
+import ErrorBoundry from 'components/ErrorBoundry';
 
 export default class App extends Component {
 
-  pokeApiService = new PokeApiService();
-
   state = {
-    showRandomPokemon: true,
-    hasError: false
+    pokeApiService: new PokeApiService(),
   };
 
-  toggleRandomPokemon = () => {
-    this.setState((state) => {
+  onChangeApi = () => {
+    this.setState(({ pokeApiService }) => {
+      const Service = pokeApiService instanceof PokeApiService ?
+                      DummyPokeApiService : PokeApiService;
+
       return {
-        showRandomPokemon: !state.showRandomPokemon
-      }
+        pokeApiService: new Service(),
+      };
     });
   };
 
-  componentDidCatch() {
-    this.setState({ hasError: true });
-  }
-
   render() {
-    const { getAllPokemon, getAllAbility } = this.pokeApiService;
-
-    if (this.state.hasError) {
-      return <ErrorIndicator />;
-    }
-
-    const randomPokemon = this.state.showRandomPokemon ? <RandomPokemon /> : null;
-
     return (
-      <div className="app-pokemon">
-        <Header />
-        {randomPokemon}
+      <ErrorBoundry>
+        <PokeApiServiceProvider value={this.state.pokeApiService}>
+          <div className="app-pokemon">
 
-        <div className="row mb2 button-row">
-          <button
-            className="toggle-pokemon btn btn-warning btn-lg"
-            onClick={this.toggleRandomPokemon}>
-            Toggle Random Pokemon
-          </button>
-          <ErrorButton />
-        </div>
+            <Header onChangeApi={this.onChangeApi} />
+            <RandomPokemon />
+            <PokemonPage />
+            <AbilityPage />
 
-        <PokemonPage />
-      </div>
+          </div>
+        </PokeApiServiceProvider>
+      </ErrorBoundry>
     );
   }
 }

@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 const PaginationItems = ({ pageSize, totalItemCount,
-                                  currentPage, onPaginationSelect }) => {
+                           currentPage, onPaginationSelect }) => {
   const pagesItems = Math.ceil(totalItemCount / pageSize);
 
   const pagination = (num, limit, range = 3) => {

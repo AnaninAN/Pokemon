@@ -1,12 +1,12 @@
-import './PokemonPage.scss';
+import './AbilityPage.scss';
 
 import React, { Component } from 'react';
 
 import Row from 'components/Row';
 import ErrorBoundry from 'components/ErrorBoundry';
-import { PokemonList, PokemonDetails } from 'components/PComponents';
+import { AbilityList, AbilityDetails } from 'components/PComponents';
 
-export default class PokemonPage extends Component {
+export default class AbilityPage extends Component {
 
   state = {
     selectedItem: null,
@@ -22,8 +22,8 @@ export default class PokemonPage extends Component {
     return (
       <ErrorBoundry>
         <Row
-          left={<PokemonList onPokemonSelected={this.onItemSelected} />}
-          right={<PokemonDetails itemId={selectedItem} />} />
+          left={<AbilityList onPokemonSelected={this.onItemSelected} />}
+          right={<AbilityDetails itemId={selectedItem} />} />
       </ErrorBoundry>
     );
   }

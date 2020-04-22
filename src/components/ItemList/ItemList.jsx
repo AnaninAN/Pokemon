@@ -1,79 +1,43 @@
 import './ItemList.scss'
 
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
-import Spinner from 'components/Spinner';
 import PaginationItems from 'components/PaginationItems';
 
-export default class ItemList extends Component {
+const ItemList = (props) => {
+  const { data: { itemList, ...otherState }, currentPage, handlePaginationSelect,
+          pokemonId, onPokemonSelected, children: renderLabel } = props;
 
-  state = {
-    data: {
-      itemList: null,
-      pageSize: null,
-      totalItemCount: null,
-    },
-    currentPage: 1,
-  };
+  const number = currentPage * otherState.pageSize - otherState.pageSize + 1;
 
-  getData(currentPage) {
-    const { getData } = this.props;
-    getData(currentPage)
-      .then((data) => {
-        this.setState({
-          data,
-          currentPage,
-        });
-      });
-  };
+  const items = itemList.map((item, idx) => {
+    const { id } = item;
+    const label = renderLabel(item);
 
-  componentDidMount() {
-    this.getData(this.state.currentPage);
-  };
-
-  handlePaginationSelect = (idPage) => {
-    this.getData(idPage);
-  };
-
-  renderItems(arr) {
-    const { currentPage, data : { pageSize } } = this.state;
-    const number = currentPage * pageSize - pageSize + 1;
-
-    return arr.map((item, idx) => {
-      const { id } = item;
-      const label = this.props.children(item);
-
-      const classes = classNames('list-group-item', {
-        'active': this.props.pokemonId === id,
-      });
-
-      return (
-        <li key={id}
-            className={classes}
-            onClick={() => this.props.onPokemonSelected(id)}>
-          <span className="list-group-item__number">{number + idx}.</span> {label}
-        </li>
-      );
+    const classes = classNames('list-group-item', {
+      'active': pokemonId === id,
     });
-  };
-
-  render() {
-    const { data: { itemList, ...otherState }, currentPage } = this.state;
-
-    const spinner = !itemList ? <li className="list-group-item d-flex"><Spinner /></li> : null;
-    const items = itemList ? this.renderItems(itemList) : null;
 
     return (
-      <>
-        <ul className="item-list list-group" start="1">
-          {spinner}
-          {items}
-        </ul>
-        <PaginationItems {...otherState}
-                            currentPage={currentPage}
-                            onPaginationSelect={this.handlePaginationSelect} />
-      </>
+      <li key={id}
+          className={classes}
+          onClick={() => onPokemonSelected(id)}>
+        <span className="list-group-item__number">{number + idx}.</span> {label}
+      </li>
     );
-  }
-}
+  });
+
+  return (
+    <>
+      <ul className="item-list list-group" start="1">
+        {items}
+      </ul>
+      <PaginationItems {...otherState}
+                          currentPage={currentPage}
+                          onPaginationSelect={handlePaginationSelect} />
+    </>
+  );
+};
+
+export default ItemList;

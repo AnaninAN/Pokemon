@@ -45,7 +45,7 @@ export default class PokeApiService {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   };
 
-  getAbilityImage = ({id}) => {
+  getAbilityImage = () => {
     return null;
   };
 
