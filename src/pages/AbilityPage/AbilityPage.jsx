@@ -1,30 +1,18 @@
 import './AbilityPage.scss';
 
-import React, { Component } from 'react';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-import Row from 'components/Row';
 import ErrorBoundry from 'components/ErrorBoundry';
-import { AbilityList, AbilityDetails } from 'components/PComponents';
+import { AbilityList } from 'components/PComponents';
 
-export default class AbilityPage extends Component {
+const AbilityPage = ({ history }) => {
 
-  state = {
-    selectedItem: null,
-  };
+  return (
+    <ErrorBoundry>
+      <AbilityList onPokemonSelected={(id) => history.push(id)} />
+    </ErrorBoundry>
+  );
+};
 
-  onItemSelected = (selectedItem) => {
-    this.setState({ selectedItem });
-  };
-
-  render() {
-    const { selectedItem } = this.state;
-
-    return (
-      <ErrorBoundry>
-        <Row
-          left={<AbilityList onPokemonSelected={this.onItemSelected} />}
-          right={<AbilityDetails itemId={selectedItem} />} />
-      </ErrorBoundry>
-    );
-  }
-}
+export default withRouter(AbilityPage);

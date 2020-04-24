@@ -2,21 +2,22 @@ import './Header.scss';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const Header = ({ onChangeApi }) => {
   return (
     <div className="header d-flex">
       <h3>
-        <a href="#">
+        <Link to="/">
           Pokemon
-        </a>
+        </Link>
       </h3>
       <ul className="d-flex">
         <li>
-          <a href="#">Pokemon</a>
+          <Link to="/pokemon/">Pokemon</Link>
         </li>
         <li>
-          <a href="#">Ability</a>
+          <Link to="/ability/">Ability</Link>
         </li>
       </ul>
       <button

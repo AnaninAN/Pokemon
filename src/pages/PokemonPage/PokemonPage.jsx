@@ -1,30 +1,22 @@
 import './PokemonPage.scss';
 
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Row from 'components/Row';
 import ErrorBoundry from 'components/ErrorBoundry';
 import { PokemonList, PokemonDetails } from 'components/PComponents';
 
-export default class PokemonPage extends Component {
-
-  state = {
-    selectedItem: null,
-  };
-
-  onItemSelected = (selectedItem) => {
-    this.setState({ selectedItem });
-  };
-
-  render() {
-    const { selectedItem } = this.state;
+const PokemonPage = ({ match, history }) => {
+    const { id } = match.params;
 
     return (
       <ErrorBoundry>
         <Row
-          left={<PokemonList onPokemonSelected={this.onItemSelected} />}
-          right={<PokemonDetails itemId={selectedItem} />} />
+          left={<PokemonList onPokemonSelected={(id) => history.push(id)} />}
+          right={<PokemonDetails itemId={id} />} />
       </ErrorBoundry>
     );
-  }
-}
+};
+
+export default withRouter(PokemonPage);
